@@ -1,0 +1,62 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link href="/css/navbar/v1/style.css" rel="stylesheet">
+ 
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">LEARN PHP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        
+        
+        
+ 
+       <? /* Commenting
+         <?php if($home == 'yes'):?>
+           <?php echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">home</a></li>')?>
+         <?endif ?>       
+        
+         <?php if($login == 'yes'):?>
+             <?php echo('<li class="nav-item"><a class="nav-link" href="/login.php">login</a></li>')?>
+         <?endif ?>     
+        
+         <?php if($auth0 == 'yes'):?>
+             <?php echo('<li class="nav-item"><a class="nav-link" href="http://localhost:3000">Auth0-Login</a></li>')?>
+         <?endif ?>    */ 
+
+        ?>
+
+
+        <?php
+          $optionsarray = explode("," , $options);
+          foreach($optionsarray as $opt)
+             
+            {
+              
+              switch ($opt) {
+                case "home":
+                  $href = '/';
+                  break;
+                case "login":
+                  $href = '/login.php';
+                  break;
+                case "auth0":
+                  $href = 'http://localhost:3000';
+                  break;
+                default:
+                  
+              }
+              echo('<li class="nav-item"><a class="nav-link active" aria-current="page" href='.$href.'>'.$opt.'</a></li>');}
+          ?>
+          
+
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

@@ -10,13 +10,31 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 $app->group('/components',  function (RouteCollectorProxy $group)  {
-
-    $group->get('/v1/footer', function (Request $request, Response $response, $args) {
+   $group->get('/v1/footer', function (Request $request, Response $response, $args) {
         $renderer = new PhpRenderer('../components/');
         $variables = $request->getQueryParams();
         return $renderer->render($response, "footer/v1/footer.phtml", $variables);
     });
 
+    $group->get('/v1/navbar', function (Request $request, Response $response, $args) {
+        $renderer = new PhpRenderer('../components/');
+        $variables = $request->getQueryParams();
+        return $renderer->render($response, "navbar/v1/navbar.phtml", $variables);
+    });
+
 });
+
+$app->get('/', function (Request $request, Response $response, $args) {
+  //$response->getBody()->write("Hello world!");
+  $renderer = new PhpRenderer('./');
+  return $renderer->render($response,"template.php");
+
+  });
+
+
+  $app->get('/login', function (Request $request, Response $response, $args){
+      $renderer = new PhpRenderer('./');
+      return $renderer->render($response,"login.php");
+  });
 
 $app->run();
