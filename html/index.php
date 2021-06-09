@@ -31,7 +31,8 @@ $app->get('/', function (Request $request, Response $response, $args) {
   //var_dump($variables);
   $variables = array(
     'termsUrl'  => 'https://www.emirates.com',
-    'termsText' => 'terms'
+    'termsText' => 'terms',
+    'options'   => 'home,login'
     
 );
  // var_dump($variables);
@@ -41,7 +42,11 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
   $app->get('/login', function (Request $request, Response $response, $args){
       $renderer = new PhpRenderer('./');
-      return $renderer->render($response,"login.php");
+      $variables = array(
+        'options'  => 'home'
+        
+    );
+      return $renderer->render($response,"login.php", $variables);
   });
 
 $app->run();

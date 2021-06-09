@@ -48,7 +48,7 @@
   <body>
     
 <header>
-  <?php include('../components/navbar.phtml'); ?>
+  <?php include('../components/navbar/v1/navbar.phtml'); ?>
 </header>
 
 <main>
@@ -89,7 +89,7 @@
 
   <!-- FOOTER -->
   <footer class="container">
-    <?php include('../components/footer.phtml'); ?>  
+    <?php include('../components/footer/v1/footer.phtml'); ?>  
   </footer>
 </main>
 

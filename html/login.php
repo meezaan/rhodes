@@ -49,7 +49,7 @@
   <body class="text-center">
   
   <header>
-  <?php include('../components/navbar-login.phtml'); ?>
+  <?php include('../components/navbar/v1/navbar.phtml'); ?>
 </header>
     
 <main class="form-signin">
