@@ -27,11 +27,17 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
 $app->get('/', function (Request $request, Response $response, $args) {
   //$response->getBody()->write("Hello world!");
   $renderer = new PhpRenderer('./');
-  $variables = $request->getQueryParams();
-  return $renderer->render($response,"template.php",$variables);
+  //$variables = $request->getQueryParams();
+  //var_dump($variables);
+  $variables = array(
+    'termsUrl'  => 'https://www.emirates.com',
+    'termsText' => 'terms'
+    
+);
+ // var_dump($variables);
+  return $renderer->render($response,"template.php", $variables);
 
   });
-
 
   $app->get('/login', function (Request $request, Response $response, $args){
       $renderer = new PhpRenderer('./');
