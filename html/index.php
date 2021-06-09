@@ -13,12 +13,12 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
    $group->get('/v1/footer', function (Request $request, Response $response, $args) {
         $renderer = new PhpRenderer('../components/');
         if(count($_GET)<2) {
-           echo("Missing query string params termsUrl, termsText");
-           exit();
-        }
-        else{
-            return $renderer->render($response, "footer/v1/footer.phtml", $_GET);
-        }
+          echo("Missing query string params termsUrl, termsText");
+          exit();
+       }
+       else{
+           return $renderer->render($response, "footer/v1/footer.phtml", $_GET);
+       }
     });
 
     $group->get('/v1/navbar', function (Request $request, Response $response, $args) {
@@ -31,9 +31,17 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
 $app->get('/', function (Request $request, Response $response, $args) {
   //$response->getBody()->write("Hello world!");
   $renderer = new PhpRenderer('./');
-  return $renderer->render($response,"template.php",$_GET);
-  });
+  //$variables = $request->getQueryParams();
+  //var_dump($variables);
+  $variables = array(
+    'termsUrl'  => 'https://www.emirates.com',
+    'termsText' => 'terms'
+    
+);
+ // var_dump($variables);
+  return $renderer->render($response,"template.php", $variables);
 
+  });
 
   $app->get('/login', function (Request $request, Response $response, $args){
       $renderer = new PhpRenderer('./');
