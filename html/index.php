@@ -12,14 +12,18 @@ $app = AppFactory::create();
 $app->group('/components',  function (RouteCollectorProxy $group)  {
    $group->get('/v1/footer', function (Request $request, Response $response, $args) {
         $renderer = new PhpRenderer('../components/');
-        $variables = $request->getQueryParams();
-        return $renderer->render($response, "footer/v1/footer.phtml", $variables);
+        if(count($_GET)<2) {
+          echo("Missing query string params termsUrl, termsText");
+          exit();
+       }
+       else{
+           return $renderer->render($response, "footer/v1/footer.phtml", $_GET);
+       }
     });
 
     $group->get('/v1/navbar', function (Request $request, Response $response, $args) {
         $renderer = new PhpRenderer('../components/');
-        $variables = $request->getQueryParams();
-        return $renderer->render($response, "navbar/v1/navbar.phtml", $variables);
+        return $renderer->render($response, "navbar/v1/navbar.phtml", $_GET);
     });
 
 });
