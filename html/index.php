@@ -27,7 +27,8 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
 $app->get('/', function (Request $request, Response $response, $args) {
   //$response->getBody()->write("Hello world!");
   $renderer = new PhpRenderer('./');
-  return $renderer->render($response,"template.php");
+  $variables = $request->getQueryParams();
+  return $renderer->render($response,"template.php",$variables);
 
   });
 

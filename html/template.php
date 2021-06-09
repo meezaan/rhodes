@@ -89,7 +89,7 @@
 
   <!-- FOOTER -->
   <footer class="container">
-    <?php include('../components/footer.phtml'); ?>  
+    <?php include('../components/footer/v1/footer.phtml'); ?>  
   </footer>
 </main>
 
