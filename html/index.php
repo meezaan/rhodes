@@ -12,12 +12,13 @@ $app = AppFactory::create();
 $app->group('/components',  function (RouteCollectorProxy $group)  {
    $group->get('/v1/footer', function (Request $request, Response $response, $args) {
         $renderer = new PhpRenderer('../components/');
+
         if(count($_GET)<2) {
           echo("Missing query string params termsUrl, termsText");
           exit();
        }
        else{
-           return $renderer->render($response, "footer/v1/footer.phtml", $_GET);
+          return $renderer->render($response, "footer/v1/footer.phtml", $_GET);
        }
     });
 
@@ -31,15 +32,17 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
 $app->get('/', function (Request $request, Response $response, $args) {
   //$response->getBody()->write("Hello world!");
   $renderer = new PhpRenderer('./');
-  //$variables = $request->getQueryParams();
-  //var_dump($variables);
-  $variables = array(
+  
+
+  if(count($_GET)>0) {
+    $variables = $request->getQueryParams();
+ }
+ else{
+    $variables = array(
     'termsUrl'  => 'https://www.emirates.com',
     'termsText' => 'terms',
-    'options'   => 'home,login'
-    
-);
- // var_dump($variables);
+    'options'   => 'home,login,auth0');
+  }
   return $renderer->render($response,"template.php", $variables);
 
   });
@@ -47,8 +50,9 @@ $app->get('/', function (Request $request, Response $response, $args) {
   $app->get('/login', function (Request $request, Response $response, $args){
       $renderer = new PhpRenderer('./');
       $variables = array(
-        'options'  => 'home'
-        
+        'termsUrl'  => 'https://www.emirates.com',
+        'termsText' => 'terms',
+        'options' => 'home'
     );
       return $renderer->render($response,"login.php", $variables);
   });
