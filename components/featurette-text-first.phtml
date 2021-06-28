@@ -1,10 +1,32 @@
+<?php
+           $url = "https://cdn.contentful.com/spaces/kcgcl5c4dlw8/environments/master/entries?access_token=rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo";
+           
+           $curl = curl_init();
+
+             //curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+             curl_setopt($curl, CURLOPT_URL, $url);
+             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+             $result = curl_exec($curl);
+             curl_close($curl);
+             $result = json_decode($result, true);
+             //print $result->{'total'};
+             $fields = $result['includes']['Asset'][0]['fields'];
+             $url = $fields['file']['url'];
+             $t = $fields['title'];
+             $d = $fields['title'];
+             
+        ?>
 <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+        <h2 class="featurette-heading"><?=$t; ?></h2>
+        <p class="lead"><?=$d; ?></p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
+        
+        
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"  width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <image title="<?= $t; ?>" href="<?= $url; ?>"/>
+       </svg>
+        
       </div>
     </div>
