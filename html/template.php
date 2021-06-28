@@ -54,7 +54,7 @@
 <main>
 
   <!-- Carousel -->
-  <?php include('../components/carousel.phtml'); ?>
+  <?php include('../components/carousel/v1/carousel.phtml'); ?>
   <!-- Carousel ends -->
 
   <!-- Marketing messaging and featurettes

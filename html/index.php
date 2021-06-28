@@ -26,7 +26,11 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
         $renderer = new PhpRenderer('../components/');
         return $renderer->render($response, "navbar/v1/navbar.phtml", $_GET);
     });
-
+    
+    $group->get('/v1/carousel', function (Request $request, Response $response, $args) {
+      $renderer = new PhpRenderer('../components/');
+      return $renderer->render($response, "carousel/v1/carousel.phtml");
+  });
 });
 
 $app->get('/', function (Request $request, Response $response, $args) {
@@ -41,7 +45,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
     $variables = array(
     'termsUrl'  => 'https://www.emirates.com',
     'termsText' => 'terms',
-    'options'   => 'home,login,auth0');
+    'options'   => 'home,login');
   }
   return $renderer->render($response,"template.php", $variables);
 
