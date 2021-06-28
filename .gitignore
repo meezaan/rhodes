@@ -1,2 +1,4 @@
 vendor/
 .idea/
+.DS_store
+html/.DS_Store

@@ -26,11 +26,12 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
         $renderer = new PhpRenderer('../components/');
         return $renderer->render($response, "navbar/v1/navbar.phtml", $_GET);
     });
-    
+
     $group->get('/v1/carousel', function (Request $request, Response $response, $args) {
       $renderer = new PhpRenderer('../components/');
-      return $renderer->render($response, "carousel/v1/carousel.phtml");
+      return $renderer->render($response, "carousel/v1/carousel.phtml", $_GET);
   });
+
 });
 
 $app->get('/', function (Request $request, Response $response, $args) {
