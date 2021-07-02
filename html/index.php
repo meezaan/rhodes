@@ -7,6 +7,29 @@ use Slim\Routing\RouteCollectorProxy;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+function getMasterContent() {
+  
+  $url = "https://cdn.contentful.com/spaces/kcgcl5c4dlw8/environments/master/entries?access_token=rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo";
+           
+  $curl = curl_init();
+
+    //curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    $result = json_decode($result, true);
+    //print $result->{'total'};
+    $fields = $result['includes']['Asset'][0]['fields'];
+    $url = $fields['file']['url'];
+    $t = $fields['title'];
+    $d = $fields['description'];
+    $variables = array ();
+    $variables += [ "title" => $t, "description" => $d, "url" => $url ];
+    return $variables;
+}
+
+
 $app = AppFactory::create();
 
 $app->group('/components',  function (RouteCollectorProxy $group)  {
@@ -48,6 +71,9 @@ $app->get('/', function (Request $request, Response $response, $args) {
     'termsText' => 'terms',
     'options'   => 'home,login');
   }
+
+           
+   $variables += getMasterContent();
   return $renderer->render($response,"template.php", $variables);
 
   });
