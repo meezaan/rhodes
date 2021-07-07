@@ -1,4 +1,6 @@
-vendor/
+rhodes/vendor/
+manisa/vendor/
 .idea/
 .DS_store
-html/.DS_Store
+rhodes/html/.DS_Store
+manisa/html/.DS_Store
