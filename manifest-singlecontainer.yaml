@@ -1,0 +1,67 @@
+# Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhodes-com-app
+  namespace: rhodes-com 
+spec:
+  replicas: 2 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: rhodes-com-app
+  template:
+    metadata:
+      labels:
+        app: rhodes-com-app
+    spec:
+      containers:
+        - name: rhodes-com-re
+          image: koundinyavakkantham/rhodes-image
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+
+
+---
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: rhodes-com-re
+  namespace: rhodes-com
+  
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: rhodes-com-app
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rhodes-com-app-ingress
+  namespace: rhodes-com
+  annotations:
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+        - "localhost"
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rhodes-com-re
+                port:
+                  number: 80
