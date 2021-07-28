@@ -1,3 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rhodes-com
+
+
 # Deployment
 ---
 apiVersion: apps/v1
@@ -22,7 +28,7 @@ spec:
     spec:
       containers:
         - name: rhodes-com-re
-          image: koundinyavakkantham/rhodes-image
+          image: quay.io/rhodes/rhodes
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -50,7 +56,7 @@ spec:
     spec:
       containers:
         - name: manisa-com-ce
-          image: koundinyavakkantham/manisa-image
+          image: quay.io/rhodes/manisa
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -63,10 +69,11 @@ metadata:
   namespace: rhodes-com
   
 spec:
- 
+  
   ports:
-    - port: 7000
+    - port: 80
       targetPort: 8080
+     
   selector:
     app: rhodes-com-app
 ---
@@ -80,8 +87,9 @@ metadata:
   namespace: rhodes-com
   
 spec:
+  
   ports:
-    - port: 7001
+    - port: 80
       targetPort: 8080
   selector:
     app: manisa-com-app
@@ -91,10 +99,12 @@ kind: Ingress
 metadata:
   name: rhodes-com-app-ingress
   namespace: rhodes-com
+  annotations:
+    kubernetes.io/ingress.class: kong
   
 spec:
   rules:
-    - host: localhost
+    - host: rhodes.x.7x.ax
       http:
         paths:
           - path: /
@@ -104,8 +114,7 @@ spec:
                 name: rhodes-com-re
                 port:
                   number: 80
-    
-    - host: localhost
+    - host: manisa.x.7x.ax
       http:
         paths:
           - path: /
@@ -114,7 +123,8 @@ spec:
               service:
                 name: manisa-com-ce
                 port:
-                  number: 81
+                  number: 80
+    
     
     
   
