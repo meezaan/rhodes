@@ -1,15 +1,19 @@
-version: '1.0'
+version: '3'
 
 services:
   rhodes:
-    image: islamicnetwork/php:8.0-apache-dev
+    build:
+      context: ./rhodes
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
       - ./rhodes:/var/www
     
   manisa:
-    image: islamicnetwork/php:8.0-apache-dev
+    build:
+      context: ./manisa
+      dockerfile: Dockerfile
     ports:
       - "8081:8080"
     volumes:
