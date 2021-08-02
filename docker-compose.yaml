@@ -1,0 +1,17 @@
+version: '1.0'
+
+services:
+  rhodes:
+    image: islamicnetwork/php:8.0-apache-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./rhodes:/var/www
+    
+  manisa:
+    image: islamicnetwork/php:8.0-apache-dev
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./manisa:/var/www
+     
