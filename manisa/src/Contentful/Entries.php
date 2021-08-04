@@ -2,27 +2,37 @@
 
 namespace Manisa\Contentful;
 
-use Contentful\Core\Resource\ResourceArray;
-use Contentful\Delivery\Client;
-use Contentful\Delivery\Resource\Entry;
-
-class Entries
+class Entries extends Client
 {
-    private Client $client;
+    protected string $environment;
+    protected string $spaceId;
 
-
-    public function __construct(string $accessToken, string $spaceId, string $environment)
+    public function __construct(string $accessToken, string $spaceId, string $environment = 'master')
     {
-        $this->client = new Client($accessToken, $spaceId, $environment);
+        $this->spaceId = $spaceId;
+        $this->environment = $environment;
+        parent::__construct($accessToken, $spaceId);
     }
 
     public function getOneById(string $id): Entry
     {
+
         return $this->client->getEntry($id);
     }
 
-    public function getAll(): ResourceArray
+    public function getAll(int $include = 10): \stdClass
     {
-        return $this->client->getEntries();
+        $response = $this->client->get('/spaces/' . $this->spaceId . '/environments/' . $this->environment . '/entries',
+        [
+            'query' => [
+                'access_token' => $this->accessToken,
+                'include' => $include
+            ]
+        ]
+        );
+
+
+
+        return json_decode($response->getBody()->getContents());
     }
 }

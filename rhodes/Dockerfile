@@ -1,5 +1,5 @@
-FROM islamicnetwork/php:8.0-apache-dev
+FROM quay.io/islamicnetwork/php:8.0-apache-dev
 
 COPY . /var/www/
-RUN cd /var/www && composer install --no-dev
+RUN cd /var/www && composer update --no-dev
 RUN chown -R www-data:www-data /var/www/

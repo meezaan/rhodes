@@ -22,6 +22,7 @@ class Page
         $query = new Query();
         $query->setContentType('page')
             ->where('fields.slug', $slug);
+        $query->setInclude(3);
 
         return $this->client->getEntries($query);
     }
