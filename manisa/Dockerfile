@@ -1,4 +1,4 @@
-FROM quay.io/islamicnetwork/php:8.0-apache-dev
+FROM quay.io/islamic-network/php:8.0-apache-dev
 
 COPY . /var/www/
 RUN cd /var/www && composer update --no-dev
