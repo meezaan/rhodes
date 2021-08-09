@@ -72,9 +72,32 @@ $app->get('/', function (Request $request, Response $response, $args) {
     'options'   => 'home,login');
   }
 
-           
-   $variables += getMasterContent();
-  return $renderer->render($response,"template.php", $variables);
+   $c = new Rhodes\Content();      
+   $page = $c->getBySlug();
+   
+   //$var = json_encode($page);
+  
+   //$var = json_decode($var, true);
+  
+
+   //$var = $response->withHeader('Content-Type', 'application/json');
+
+    //print $result->{'total'};
+    //$fields = $var['items'][0]['fields'];
+   // $url = $fields['file']['url'];
+    //$t = $fields['title'];
+   // $d = $fields['description'];
+
+    $t = $page->items[0]->fields->title;
+    $url = $page->includes->Asset[0]->fields->file->url;
+    $d = $page->includes->Asset[0]->fields->description;
+    $variables = array(
+      'termsUrl'  => 'https://www.emirates.com',
+      'termsText' => 'terms',
+      'options' => 'home'
+  );
+    $variables += [ "title" => $t, "description" => $d, "url" => $url];
+    return $renderer->render($response,"template.php", $variables);
 
   });
 

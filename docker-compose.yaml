@@ -9,6 +9,8 @@ services:
       - "8080:8080"
     volumes:
       - ./rhodes:/var/www
+    environment:
+      MANISA_URI: "http://rhodes_manisa_1:8081"
     
   manisa:
     build:
@@ -18,4 +20,8 @@ services:
       - "8081:8080"
     volumes:
       - ./manisa:/var/www
+    environment:
+      ACCESS_TOKEN: "rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo"
+      SPACE_ID: "kcgcl5c4dlw8"
+      ENVIRONMENT:  "master"
      
