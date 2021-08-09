@@ -75,18 +75,6 @@ $app->get('/', function (Request $request, Response $response, $args) {
    $c = new Rhodes\Content();      
    $page = $c->getBySlug();
    
-   //$var = json_encode($page);
-  
-   //$var = json_decode($var, true);
-  
-
-   //$var = $response->withHeader('Content-Type', 'application/json');
-
-    //print $result->{'total'};
-    //$fields = $var['items'][0]['fields'];
-   // $url = $fields['file']['url'];
-    //$t = $fields['title'];
-   // $d = $fields['description'];
 
     $t = $page->items[0]->fields->title;
     $url = $page->includes->Asset[0]->fields->file->url;

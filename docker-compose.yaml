@@ -10,7 +10,7 @@ services:
     volumes:
       - ./rhodes:/var/www
     environment:
-      MANISA_URI: "http://rhodes_manisa_1:8081"
+      MANISA_URI: "http://rhodes_manisa_1:8080"
     
   manisa:
     build:
