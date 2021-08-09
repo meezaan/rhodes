@@ -1,0 +1,6 @@
+{
+    "require": {
+        "contentful/core": "^3.1",
+        "contentful/laravel": "^8.1"
+    }
+}

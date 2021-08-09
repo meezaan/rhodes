@@ -2,29 +2,38 @@
 
 namespace Manisa\Contentful;
 
-use Contentful\Core\Resource\ResourceArray;
-use Contentful\Delivery\Client;
-use Contentful\Delivery\Query;
-use Contentful\Delivery\Resource\Entry;
-
-class Page
+class Page extends Client
 {
-    private Client $client;
+    protected string $environment;
+    protected string $spaceId;
+    protected string $slug;
 
-
-    public function __construct(string $accessToken, string $spaceId, string $environment)
+    public function __construct(string $accessToken, string $spaceId, string $environment = 'master', string $slug = 'home')
     {
-        $this->client = new Client($accessToken, $spaceId, $environment);
+        $this->spaceId = $spaceId;
+        $this->environment = $environment;
+        $this->slug = $slug;
+        parent::__construct($accessToken, $spaceId);
     }
 
-    public function getBySlug(string $slug): ResourceArray
+    public function getBySlug(int $include = 10): \stdClass
     {
-        $query = new Query();
-        $query->setContentType('page')
-            ->where('fields.slug', $slug);
-        $query->setInclude(3);
+        $response = $this->client->get('/spaces/' . $this->spaceId . '/environments/' . $this->environment . '/entries',
+        [
+            'query' => [
+                'access_token' => $this->accessToken,
+                'include' => $include,
+                'fields.slug' => $this->slug,
+                'content_type' => 'page'
+              
+                
+            ]
+            
+        ]
+        );
 
-        return $this->client->getEntries($query);
+           
+
+        return json_decode($response->getBody()->getContents());
     }
-
 }

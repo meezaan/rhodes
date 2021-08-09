@@ -1,4 +1,6 @@
 <?php
+
+use Manisa\Contentful\guzzlePage;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -19,12 +21,18 @@ $app->get('/entries', function (Request $request, Response $response, $args) {
 
 $app->get('/', function (Request $request, Response $response, $args) {
       //$c = new Page('rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo', 'kcgcl5c4dlw8', 'master');
+      //$c = new Page($_ENV['ACCESS_TOKEN'], $_ENV['SPACE_ID'], $_ENV['ENVIRONMENT']);
       $c = new Page($_ENV['ACCESS_TOKEN'], $_ENV['SPACE_ID'], $_ENV['ENVIRONMENT']);
-      $page = $c->getBySlug('home');
+      $page = $c->getBySlug();
 
       $response->getBody()->write(json_encode($page));
 
       return $response->withHeader('Content-Type', 'application/json');
+    
+    
+
+
+
   });
 
 $app->get('/{slug}', function (Request $request, Response $response, $args) {
@@ -32,7 +40,7 @@ $app->get('/{slug}', function (Request $request, Response $response, $args) {
 //    $c = new Page('rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo', 'kcgcl5c4dlw8', 'master');
 //    $page = $c->getBySlug($slug);
 //    $response->getBody()->write(json_encode($page));
-
+/* 
     $cli = new Contentful\Delivery\Client('rFxeUauT0DI-qhzmPvd2QOu075dcoEwSxIGoJyoQ2Fo', 'kcgcl5c4dlw8', 'master');
     $query= new \Contentful\Delivery\Query();
     $query->setInclude(3);
@@ -44,7 +52,17 @@ $app->get('/{slug}', function (Request $request, Response $response, $args) {
 
     $response->getBody()->write(json_encode($e));
 
+    return $response->withHeader('Content-Type', 'application/json'); */
+    
+    
+    $slug = $request->getAttribute('slug');
+    $c = new Page($_ENV['ACCESS_TOKEN'], $_ENV['SPACE_ID'], $_ENV['ENVIRONMENT'],$slug);
+    $page = $c->getBySlug();
+    $response->getBody()->write(json_encode($page));
     return $response->withHeader('Content-Type', 'application/json');
+
+
+
 });
 
 
