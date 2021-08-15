@@ -12,8 +12,8 @@ class Head
      */
     public string $id;
     public string $title;
-    public object $navbar;
-    public function __construct(string $id, string $title,object $navbar)
+    public Navbar $navbar;
+    public function __construct(string $id, string $title,Navbar $navbar)
     {
         $this->id = $id;
         $this->title = $title;

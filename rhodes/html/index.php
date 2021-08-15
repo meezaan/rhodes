@@ -76,12 +76,14 @@ $app->get('/', function (Request $request, Response $response, $args) {
    $page = $c->getBySlug();
    
 
-    $t = $page->items[0]->fields->title;
-    $url = $page->includes->Asset[0]->fields->file->url;
-    $d = $page->includes->Asset[0]->fields->description;
+    $t = $page->title;
+    
+
+    $url = $page->rows[0]->components[0]->image->url;
+    $d = $page->rows[0]->components[0]->image->description;
     $variables = array(
-      'termsUrl'  => 'https://www.emirates.com',
-      'termsText' => 'terms',
+      'termsUrl'  => $page->footer->copyright,
+      'termsText' => $page->footer->right_text,
       'options' => 'home'
   );
     $variables += [ "title" => $t, "description" => $d, "url" => $url];
