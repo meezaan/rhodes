@@ -54,7 +54,7 @@ class Content extends GuzzleHttpClient
         // Sample code to test Object initiation for each component
         
 
-        foreach ($entry as $ent)
+        foreach ($entry as $ent)  // First loop to identify the Header
         {
           $ctype = $ent->sys->contentType->sys->id;
           $eid = $ent->sys->id;
@@ -72,7 +72,7 @@ class Content extends GuzzleHttpClient
           
         }
 
-        foreach ($entry as $ent)
+        foreach ($entry as $ent) // Second loop to get the Navbar and Link IDs
         { 
             $eid = $ent->sys->id; 
             if ($eid == $nav_id)
@@ -97,7 +97,7 @@ class Content extends GuzzleHttpClient
 
         }
         $links = array();
-        foreach ($entry as $ent)
+        foreach ($entry as $ent) // Third loop to get Links
         {
 
             $eid = $ent->sys->id;
@@ -107,8 +107,8 @@ class Content extends GuzzleHttpClient
                 $link_text = $ent->fields->text;
                 $link_title = $ent->fields->title;
                 $link_Is_blank = $ent->fields->blank;
-                $link= new Link($link_url,$link_text,$link_title,$link_Is_blank);
-                array_push($links,$link);
+                $link= new Link($link_url,$link_text,$link_title,$link_Is_blank); //Create Link using link class
+                array_push($links,$link); //Create an array of links
 
 
             } 
@@ -117,14 +117,14 @@ class Content extends GuzzleHttpClient
 
         }
        
-        $navbar = new Navbar($nav_name,$links);
-        $header = new Head($hid,$h_title,$navbar);
+        $navbar = new Navbar($nav_name,$links); // Instantiate a new Navbar class object
+        $header = new Head($hid,$h_title,$navbar); // Instantiate a new Header class object
         //var_dump($header);exit;
-
+        // Test if the Header object is working --START-->
         var_dump($header->id);
         var_dump($header->title);
         var_dump($header->navbar);
-        exit;
+        exit; // Test if the Header object is working --END>
         
 
 
