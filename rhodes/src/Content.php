@@ -32,8 +32,11 @@ class Content extends GuzzleHttpClient
         //-START-Code to make the flat Json response by loopiong all entries
         $page = json_decode($response->getBody()->getContents());
      
+        //A contentful page will have list of Entries and list of Assets in the Includes"
         $entry = $page->includes->Entry; // List of Entry types
         $assets = $page->includes->Asset; //List of Asset types
+
+
 
 
         
@@ -87,7 +90,7 @@ class Content extends GuzzleHttpClient
                                 $asset_id = $ent->fields->image->sys->id;
                                 if($ent->fields->image->sys->linkType == 'Asset')
                                 {
-                                    foreach($assets as $a)
+                                    foreach($assets as $a) //$assets is list of arrays collected at the starting
                                     {
                                         if($asset_id == $a->sys->id)
                                         {
@@ -198,7 +201,7 @@ class Content extends GuzzleHttpClient
 
 
         $p = new Page($page_title,$header,$Rows,$footer);
-        //var_dump($p);
+        //var_dump($p);exit;
         return($p);
         
 
