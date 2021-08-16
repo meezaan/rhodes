@@ -36,6 +36,13 @@ class Content extends GuzzleHttpClient
         $entry = $page->includes->Entry; // List of Entry types
         $assets = $page->includes->Asset; //List of Asset types
 
+        $x = [];
+        foreach ($entry as $e) {
+            $x[$e->sys->id]['original'] = $e;
+
+        }
+        var_dump($x);
+        exit;
 
 
 

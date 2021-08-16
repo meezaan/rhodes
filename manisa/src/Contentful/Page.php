@@ -16,7 +16,7 @@ class Page extends Client
         parent::__construct($accessToken, $spaceId);
     }
 
-    public function getBySlug(int $include = 10): \stdClass
+    public function getBySlug(int $include = 10): array
     {
         $response = $this->client->get('/spaces/' . $this->spaceId . '/environments/' . $this->environment . '/entries',
         [
@@ -34,6 +34,6 @@ class Page extends Client
 
            
 
-        return json_decode($response->getBody()->getContents());
+        return json_decode($response->getBody()->getContents(), true);
     }
 }

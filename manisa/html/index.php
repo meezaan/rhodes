@@ -24,7 +24,22 @@ $app->get('/', function (Request $request, Response $response, $args) {
       $c = new Page($_ENV['ACCESS_TOKEN'], $_ENV['SPACE_ID'], $_ENV['ENVIRONMENT']);
       $page = $c->getBySlug();
 
-      $response->getBody()->write(json_encode($page));
+      //$response->getBody()->write(json_encode($page));
+
+        $entry = $page['includes']['Entry']; // List of Entry types
+        //$assets = $page->includes->Asset; //List of Asset types
+
+
+        $x = [];
+        $x['items'] = $page['items'];
+        foreach ($entry as $e) {
+            $x['includes'][$e['sys']['id']] = [];
+            $x['includes'][$e['sys']['id']]['original'] = $e;
+            $x['includes'][$e['sys']['id']]['type'] = $e['metadata']['tags'][0]['sys']['id'];
+        }
+
+        $response->getBody()->write(json_encode($x));
+
 
       return $response->withHeader('Content-Type', 'application/json');
     
