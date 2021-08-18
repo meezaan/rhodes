@@ -15,11 +15,12 @@ class Component
     public Asset $image;
     
     
-    public function __construct(string $heading , string $text , Asset $image )
+    public function __construct(string $heading , string $text , Asset $image, string $type )
     {
         $this->heading = $heading;
         $this->text = $text;
         $this->image = $image;
+        $this->type = $type;
         
     }
     

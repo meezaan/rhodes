@@ -64,10 +64,15 @@
   <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
-    <?php include('../components/marketing-message.phtml'); ?>
-    <?php include('../components/marketing-message.phtml'); ?>
-    <?php include('../components/marketing-message.phtml'); ?>
+      <?php
+      foreach ($rows as $row) { ?>
+      <div class="row">
+        <?php foreach ($row->components as $component) { ?>
+            <?php include('../components/' . $component->type . '.phtml'); ?>
+        <?php } ?>
+      </div>
+
+      <?php } ?>
     
     </div><!-- /.row -->
     </div>

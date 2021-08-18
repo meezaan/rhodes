@@ -41,8 +41,6 @@ class Content extends GuzzleHttpClient
             $x[$e->sys->id]['original'] = $e;
 
         }
-        var_dump($x);
-        exit;
 
 
 
@@ -91,6 +89,7 @@ class Content extends GuzzleHttpClient
                         {
                             $comp_heading = $ent->fields->heading;
                             $comp_text = $ent->fields->text;
+                            $comp_type = $ent->fields->type;
                             if($ent->fields->image->sys->id)
                             
                             {
@@ -109,7 +108,7 @@ class Content extends GuzzleHttpClient
                                     }
                                 }
                             }
-                            $component = new Component($comp_heading,$comp_text,$comp_asset);
+                            $component = new Component($comp_heading,$comp_text,$comp_asset, $comp_type);
                             array_push($component_list,$component);
                             //var_dump($component_list);
                         }

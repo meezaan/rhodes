@@ -60,17 +60,6 @@ $app->group('/components',  function (RouteCollectorProxy $group)  {
 $app->get('/', function (Request $request, Response $response, $args) {
   //$response->getBody()->write("Hello world!");
   $renderer = new PhpRenderer('./');
-  
-
-  /* if(count($_GET)>0) {
-    $variables = $request->getQueryParams();
- }
- else{
-    $variables = array(
-    'termsUrl'  => 'https://www.emirates.com',
-    'termsText' => 'terms',
-    'options'   => 'home,login');
-  } */
 
    $c = new Rhodes\Content();      
    $page = $c->getBySlug();
@@ -83,18 +72,10 @@ $app->get('/', function (Request $request, Response $response, $args) {
     $d = $page->rows[0]->components[0]->image->description;
     $nav_links = $page->header->navbar->links;
 
-    //var_dump($nav_links);exit;
+    echo "<pre>";
+    print_r($page);exit;
 
-    $variables = array(
-      'termsUrl'  => $page->footer->copyright,
-      'termsText' => $page->footer->right_text,
-      'links' => $nav_links,
-      'navName' => $page->header->navbar->name
-  );
-    $variables += [ "title" => $t, "description" => $d, "url" => $url];
-    //var_dump($variables);exit;
-    //return $renderer->render($response,"template.php", $variables);
-    return $renderer->render($response,"template.php", $variables);
+    return $renderer->render($response,"template.php", (array) $page);
   });
 
   $app->get('/login', function (Request $request, Response $response, $args){
