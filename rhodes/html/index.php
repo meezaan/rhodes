@@ -66,16 +66,38 @@ $app->get('/', function (Request $request, Response $response, $args) {
    
 
     $t = $page->title;
+
+    $header = $page->header;
+    $rows = $page->rows;
+    $footer = $page->footer;
+    $variables = array('header' =>$header,'rows' => $rows,'footer' => $footer);
+    //echo "<pre>";
+    //print_r($rows);
+    //var_dump($variables);exit;
+   // var_dump($variables);exit;
     
 
-    $url = $page->rows[0]->components[0]->image->url;
+    /* $url = $page->rows[0]->components[0]->image->url;
     $d = $page->rows[0]->components[0]->image->description;
     $nav_links = $page->header->navbar->links;
+    $nav_name = $page->header->navbar->name;
+    $variables = array(
+      'termsUrl'  => $url,
+      'termsText' => $d,
+      'navName' => $nav_name,
+      'links' =>  $nav_links,
+      'title' => 'test',
+      'url' => 'www.emirates.com',
+      'description' => 'test'
 
-    echo "<pre>";
-    print_r($page);exit;
+  );
+    var_dump($variables); */
 
-    return $renderer->render($response,"template.php", (array) $page);
+    //echo "<pre>";
+    //print_r($page);exit;
+
+    return $renderer->render($response,"template.php", $variables);
+    //return $renderer->render($response,"home.php", $variables);
   });
 
   $app->get('/login', function (Request $request, Response $response, $args){

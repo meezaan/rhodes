@@ -54,17 +54,17 @@
 <main>
 
   <!-- Carousel -->
-  <?php include('../components/carousel/v1/carousel.phtml'); ?>
+  <!-- ?php include('../components/carousel/v1/carousel.phtml'); ?>  -->
   <!-- Carousel ends -->
 
   <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
-
   <div class="container marketing">
 
-    <!-- Three columns of text below the carousel -->
-      <?php
+<!-- Three columns of text below the carousel -->
+
+<?php
       foreach ($rows as $row) { ?>
       <div class="row">
         <?php foreach ($row->components as $component) { ?>
@@ -76,20 +76,29 @@
     
     </div><!-- /.row -->
     </div>
- <!-- START THE FEATURETTES -->
 
- <hr class="featurette-divider">
+<!--div class="row">
+<!?php include('../components/marketing-message.phtml'); ?>
+<!?php include('../components/marketing-message.phtml'); ?>
+<!?php include('../components/marketing-message.phtml'); ?>
 
-<?php include('../components/featurette-text-first.phtml'); ?>
+</div><! /.row -->
+<!--/div>
+ 
+ <! START THE FEATURETTES -->
+
+ <!--hr class="featurette-divider">
+
+<!?php include('../components/featurette-text-first.phtml'); ?>
 <hr class="featurette-divider">
 
-<?php include('../components/featurette-image-first.phtml'); ?>
+<!?php include('../components/featurette-image-first.phtml'); ?>
 
 <hr class="featurette-divider">
-<?php include('../components/featurette-text-first.phtml'); ?>
+<!?php include('../components/featurette-text-first.phtml'); ?>
 <hr class="featurette-divider">
-<!-- /END THE FEATURETTES -->
- </div><!-- /.container -->
+<!-/END THE FEATURETTES -->
+ <!--/div><!/.container -->
 
 
   <!-- FOOTER -->

@@ -31,7 +31,7 @@ class Content extends GuzzleHttpClient
 
         //-START-Code to make the flat Json response by loopiong all entries
         $page = json_decode($response->getBody()->getContents());
-     
+    
         //A contentful page will have list of Entries and list of Assets in the Includes"
         $entry = $page->includes->Entry; // List of Entry types
         $assets = $page->includes->Asset; //List of Asset types

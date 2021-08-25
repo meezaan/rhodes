@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="manisa/html"/>
+	<buildpathentry kind="src" path="manisa/src/Contentful"/>
+	<buildpathentry kind="src" path="manisa/vendor"/>
+	<buildpathentry kind="src" path="rhodes/components"/>
+	<buildpathentry kind="src" path="rhodes/html"/>
+	<buildpathentry kind="src" path="rhodes/src"/>
+	<buildpathentry kind="src" path="rhodes/vendor"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
