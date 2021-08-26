@@ -68,7 +68,7 @@
       foreach ($rows as $row) { ?>
       <div class="row">
         <?php foreach ($row->components as $component) { ?>
-            <?php include('../components/' . $component->type . '.phtml'); ?>
+            <?php include('../components/' . $component->type . '/v1/' . $component->type .'.phtml'); ?>
         <?php } ?>
       </div>
 

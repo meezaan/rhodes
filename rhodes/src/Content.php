@@ -90,6 +90,10 @@ class Content extends GuzzleHttpClient
                             $comp_heading = $ent->fields->heading;
                             $comp_text = $ent->fields->text;
                             $comp_type = $ent->fields->type;
+                            
+                            $comp_btn_text = $ent->fields->buttonText;
+                            
+                            $comp_btn_url = $ent->fields->buttonUrl;
                             if($ent->fields->image->sys->id)
                             
                             {
@@ -108,7 +112,8 @@ class Content extends GuzzleHttpClient
                                     }
                                 }
                             }
-                            $component = new Component($comp_heading,$comp_text,$comp_asset, $comp_type);
+                           
+                            $component = new Component($comp_heading,$comp_text,$comp_asset, $comp_type, $comp_btn_text, $comp_btn_url);
                             array_push($component_list,$component);
                             //var_dump($component_list);
                         }
